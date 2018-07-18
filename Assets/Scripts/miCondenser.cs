@@ -5,11 +5,15 @@ using UnityEngine;
 public class miCondenser : MagicItem {
 
     [SerializeField]
+    RuneTier runeTier;
+    [SerializeField]
     List<Rune> runes = new List<Rune>();
     [SerializeField]
     float distance;
     [SerializeField]
     float above;
+    [SerializeField]
+    Focus focus;
 
     // Use this for initialization
     void Start () {
@@ -21,9 +25,15 @@ public class miCondenser : MagicItem {
 		
 	}
 
-    public void SetRunes(List<Rune> runeList)
+    public void SetRunes(RuneTier runeTier)
     {
-        runes = runeList;
+        runeTier = runeTier;
+        runes = runeTier.GetRunes();
+    }
+
+    public void SetFocus(Focus newFocus)
+    {
+        focus = newFocus;
     }
 
     public override void CreateChildren()
@@ -31,6 +41,7 @@ public class miCondenser : MagicItem {
         Debug.Log("Creating some motes!");
         GameObject newMote;
         miMote newMoteMI;
+        Renderer newMoteRenderer;
         float theta = (2 * Mathf.PI / runes.Count);
         float xPos;
         float yPos;
@@ -43,14 +54,26 @@ public class miCondenser : MagicItem {
             newMote.name = "Mote-" + rune.name;
             newMoteMI = newMote.GetComponent<miMote>();
             newMoteMI.SetParent(this);
+            newMoteMI.SetFocus(focus);
+
+            newMoteRenderer = newMote.GetComponentInChildren<Renderer>();
+            newMoteRenderer.material.SetColor("_Color", rune.element.groupColor);
             
             children.Add(newMoteMI);
 
             // Set positioning
-            xPos = Mathf.Sin(theta * i);
-            yPos = Mathf.Cos(theta * i);
-            newMote.transform.localPosition = new Vector3(xPos * distance, yPos * distance, above);
-            newMote.transform.LookAt(gameObject.transform);
+            if (runes.Count > 1)
+            {
+                xPos = Mathf.Sin(theta * i);
+                yPos = Mathf.Cos(theta * i);
+                newMote.transform.localPosition = new Vector3(xPos * distance, yPos * distance, above);
+            }
+            else
+            {
+                newMote.transform.localPosition = new Vector3(0, 0, above);
+            }
+            newMote.transform.LookAt(focus.transform);
+
         }
 
     }

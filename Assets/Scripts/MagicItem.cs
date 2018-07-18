@@ -6,13 +6,21 @@ public class MagicItem : MonoBehaviour {
     // A magic item is something that is 
     // viewable with Mage vision
     [SerializeField]
-    protected MagicItem parent;
+    public MagicItem parent;
     [SerializeField]
-    protected List<MagicItem> children = new List<MagicItem>();
+    public List<MagicItem> children = new List<MagicItem>();
     [SerializeField]
     protected int currentChildIndex;
     [SerializeField]
     protected GameObject childPrefab;
+    [SerializeField]
+    public Vector3 camPosition;
+    [SerializeField]
+    public GameObject buttonPrefab;
+    [SerializeField]
+    public string mvType;
+
+    public bool hasMesh;
     
     // Magic Items are set up to allow
     // for transition to and from surrounding

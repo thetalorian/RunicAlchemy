@@ -9,6 +9,7 @@ public class RuneTier : MonoBehaviour {
     public Sprite tierImage;
     public string tierName;
     public List<Rune> runes;
+    public Color groupColor;
 
 
 	// Use this for initialization

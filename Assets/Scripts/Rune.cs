@@ -8,6 +8,8 @@ public class Rune : MonoBehaviour {
     public int level;
     public string runename;
     public Sprite sprite;
+    public RuneTier tier;
+    public RuneElement element;
 
 	// Use this for initialization
 	void Start () {

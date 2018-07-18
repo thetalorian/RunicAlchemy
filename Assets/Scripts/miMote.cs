@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class miMote : MagicItem {
-
+    [SerializeField]
+    Focus focus;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,4 +14,8 @@ public class miMote : MagicItem {
 	void Update () {
 		
 	}
+
+    public void SetFocus(Focus newFocus) {
+        focus = newFocus;
+    }
 }
