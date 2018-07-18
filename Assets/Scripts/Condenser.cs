@@ -105,13 +105,13 @@ public class Condenser : MonoBehaviour
         moteTabRT.localScale = full;
 
         // Create Motes
-        Rune[] myRunes = runeTier.GetRunes();
-        motes = new Mote[myRunes.Length];
+        List<Rune> myRunes = runeTier.GetRunes();
+        motes = new Mote[myRunes.Count];
 
         // We need to determine our lanes.
         float marginOffset = 0.05f;
-        int rows = ((myRunes.Length - 1) / 3) + 1;
-        int cols = ((myRunes.Length - 1) % 3) + 1;
+        int rows = ((myRunes.Count - 1) / 3) + 1;
+        int cols = ((myRunes.Count - 1) % 3) + 1;
 
         float rowsize = (1 - (marginOffset * 2)) / rows;
         float colsize = (1 - (marginOffset * 2)) / cols;
@@ -119,7 +119,7 @@ public class Condenser : MonoBehaviour
         GameObject thisMote;
         RectTransform thisMoteRT;
         GameObject motePrefab = (GameObject)Resources.Load("Mote", typeof(GameObject));
-        for (int i = 0; i < myRunes.Length; i++)
+        for (int i = 0; i < myRunes.Count; i++)
         {
             Rune rune = myRunes[i];
             int rowpos = i / 3;

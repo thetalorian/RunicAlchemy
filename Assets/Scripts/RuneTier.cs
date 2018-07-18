@@ -8,7 +8,7 @@ public class RuneTier : MonoBehaviour {
 
     public Sprite tierImage;
     public string tierName;
-    public Rune[] runes;
+    public List<Rune> runes;
 
 
 	// Use this for initialization
@@ -21,7 +21,7 @@ public class RuneTier : MonoBehaviour {
 		
 	}
 
-    public Rune[] GetRunes() {
+    public List<Rune> GetRunes() {
         return runes;
     }
 }

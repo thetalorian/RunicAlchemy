@@ -6,7 +6,7 @@ public class Rune : MonoBehaviour {
 
 
     public int level;
-    public string name;
+    public string runename;
     public Sprite sprite;
 
 	// Use this for initialization
