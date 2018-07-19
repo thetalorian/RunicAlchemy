@@ -15,6 +15,9 @@ public class miCondenser : MagicItem {
     [SerializeField]
     Focus focus;
 
+    [SerializeField]
+    protected GameObject EmitterPrefab;
+
     UpgradableStat speed;
     UpgradableStat max;
 
@@ -47,6 +50,7 @@ public class miCondenser : MagicItem {
         Debug.Log("Creating some motes!");
         GameObject newMote;
         miMote newMoteMI;
+        MoteEmitter newEmitter;
         Renderer newMoteRenderer;
         float theta = (2 * Mathf.PI / runes.Count);
         float xPos;
@@ -78,6 +82,14 @@ public class miCondenser : MagicItem {
             {
                 newMote.transform.localPosition = new Vector3(0, 0, above);
             }
+
+            // Create the connected Emitter
+            newEmitter = Instantiate(EmitterPrefab).GetComponent<MoteEmitter>();
+            newEmitter.gameObject.transform.SetParent(focus.emitters.transform,false);
+            newEmitter.gameObject.name = "MoteEmitter-" + rune.name;
+            newEmitter.SetFocus(focus);
+            newMoteMI.SetEmitter(newEmitter);
+
             newMote.transform.LookAt(focus.transform);
 
         }

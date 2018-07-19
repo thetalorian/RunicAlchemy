@@ -21,6 +21,8 @@ public class Focus : MonoBehaviour {
     int drawrate; // How many draw attempts before working.
     int drawAmount; // How much is drawn with each tick.
 
+    public GameObject emitters;
+
     // Use this for initialization
     void Start()
     {

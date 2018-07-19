@@ -6,8 +6,16 @@ using UnityEngine.UI;
 public class MageVision : MonoBehaviour {
     // The centralized viewer for
     // game object stats.
+    [Header("Canvases")]
     [SerializeField]
     private Canvas inspectionCanvas;
+    [SerializeField]
+    private Canvas navigationCanvas;
+    [SerializeField]
+    private Canvas gameCanvas;
+    [Space]
+    [SerializeField]
+    private bool inspecting;
     [SerializeField]
     private Camera camera;
     [SerializeField]
@@ -44,6 +52,8 @@ public class MageVision : MonoBehaviour {
 	void Start () {
         currentTarget = gameObject.GetComponent<MagicItem>();
         CreateElements();
+        inspecting = true;
+        ToggleInspector();
 	}
 	
 	// Update is called once per frame
@@ -56,11 +66,15 @@ public class MageVision : MonoBehaviour {
         if (inspectionCanvas.enabled)
         {
             inspectionCanvas.enabled = false;
+            navigationCanvas.enabled = false;
+            gameCanvas.enabled = true;
             CamToPlayer();
         }
         else
         {
             inspectionCanvas.enabled = true;
+            navigationCanvas.enabled = true;
+            gameCanvas.enabled = false;
             RefreshCam();
         }
     }
@@ -134,7 +148,7 @@ public class MageVision : MonoBehaviour {
             // Create a "go to parent" back button
             newUIElement = Instantiate(currentTarget.parent.buttonPrefab);
             uiElements.Add(newUIElement);
-            newUIElement.transform.SetParent(inspectionCanvas.transform, false);
+            newUIElement.transform.SetParent(navigationCanvas.transform, false);
             newUIElement.name = "UI-" + currentTarget.parent.name;
             newUIElementUI = newUIElement.GetComponent<UIElement>();
             newUIElementUI.Customize(currentTarget.parent);
@@ -160,7 +174,7 @@ public class MageVision : MonoBehaviour {
                 }
                 newUIElement = Instantiate(currentTarget.parent.buttonPrefab);
                 uiElements.Add(newUIElement);
-                newUIElement.transform.SetParent(inspectionCanvas.transform, false);
+                newUIElement.transform.SetParent(navigationCanvas.transform, false);
                 newUIElement.name = "UI-" + siblings[next].name;
                 newUIElementUI = newUIElement.GetComponent<UIElement>();
                 newUIElementUI.Customize(siblings[next]);
@@ -171,7 +185,7 @@ public class MageVision : MonoBehaviour {
 
                 newUIElement = Instantiate(currentTarget.parent.buttonPrefab);
                 uiElements.Add(newUIElement);
-                newUIElement.transform.SetParent(inspectionCanvas.transform, false);
+                newUIElement.transform.SetParent(navigationCanvas.transform, false);
                 newUIElement.name = "UI-" + siblings[prev].name;
                 newUIElementUI = newUIElement.GetComponent<UIElement>();
                 newUIElementUI.Customize(siblings[prev]);
@@ -194,8 +208,8 @@ public class MageVision : MonoBehaviour {
         float theta = (2 * Mathf.PI / currentTarget.children.Count);
         float xPos;
         float yPos;
-        RectTransform inspectorRect = inspectionCanvas.GetComponent<RectTransform>();
-        float distance = Mathf.Min(inspectorRect.rect.width, inspectorRect.rect.height) / 4;
+        RectTransform navRect = navigationCanvas.GetComponent<RectTransform>();
+        float distance = Mathf.Min(navRect.rect.width, navRect.rect.height) / 4;
 
         for (int i = 0; i < currentTarget.children.Count; i++)
         {
@@ -203,7 +217,7 @@ public class MageVision : MonoBehaviour {
             MagicItem child = currentTarget.children[i];
             newUIElement = Instantiate(child.buttonPrefab);
             uiElements.Add(newUIElement);
-            newUIElement.transform.SetParent(inspectionCanvas.transform, false);
+            newUIElement.transform.SetParent(navigationCanvas.transform, false);
             newUIElement.name = "UI-" + child.name;
             newUIElementUI = newUIElement.GetComponent<UIElement>();
             newUIElementUI.Customize(child);
@@ -232,12 +246,12 @@ public class MageVision : MonoBehaviour {
 
         // Children First.
         // Let's make a line across the bottom of the screen
-        RectTransform inspectorRect = inspectionCanvas.GetComponent<RectTransform>();
-        float lineWidth = inspectorRect.rect.width * 0.8f;
+        RectTransform navRect = navigationCanvas.GetComponent<RectTransform>();
+        float lineWidth = navRect.rect.width * 0.8f;
         float spaceWidth = lineWidth / currentTarget.children.Count;
         float xPos;
 
-        float height = inspectorRect.rect.height * 0.3f;
+        float height = navRect.rect.height * 0.3f;
 
         for (int i = 0; i < currentTarget.children.Count; i++)
         {
@@ -245,7 +259,7 @@ public class MageVision : MonoBehaviour {
             MagicItem child = currentTarget.children[i];
             newUIElement = Instantiate(child.buttonPrefab);
             uiElements.Add(newUIElement);
-            newUIElement.transform.SetParent(inspectionCanvas.transform, false);
+            newUIElement.transform.SetParent(navigationCanvas.transform, false);
             newUIElement.name = "UI-" + child.name;
             newUIElementUI = newUIElement.GetComponent<UIElement>();
             newUIElementUI.Customize(child);
@@ -260,6 +274,7 @@ public class MageVision : MonoBehaviour {
         // Now we need to make the upgrades.
         float theta = (2 * Mathf.PI / currentTarget.upgradableStats.Count);
         float yPos;
+        RectTransform inspectorRect = inspectionCanvas.GetComponent<RectTransform>();
         float distance = Mathf.Min(inspectorRect.rect.width, inspectorRect.rect.height) / 8;
         for (int i = 0; i < currentTarget.upgradableStats.Count; i++)
         {

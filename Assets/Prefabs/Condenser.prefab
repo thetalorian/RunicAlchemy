@@ -140,6 +140,7 @@ MonoBehaviour:
   distance: 0
   above: 0
   focus: {fileID: 0}
+  EmitterPrefab: {fileID: 0}
 --- !u!114 &114758405496609582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -154,7 +155,7 @@ MonoBehaviour:
   parent: {fileID: 0}
   children: []
   currentChildIndex: 0
-  childPrefab: {fileID: 1275659772801614, guid: 9b83f6f585d2b08489507a7441405266,
+  childPrefab: {fileID: 1947659703429584, guid: 9b83f6f585d2b08489507a7441405266,
     type: 2}
   camPosition: {x: 0, y: 0, z: 0}
   buttonPrefab: {fileID: 1167461700740114, guid: 064e8bd79ab4c430c8beef7dab20f1c7,
@@ -168,6 +169,8 @@ MonoBehaviour:
   distance: 0.5
   above: 0.15
   focus: {fileID: 0}
+  EmitterPrefab: {fileID: 1245123304674804, guid: 225eeb29b5e9a461f92fadf6eae12a78,
+    type: 2}
 --- !u!136 &136597543803200550
 CapsuleCollider:
   m_ObjectHideFlags: 1
