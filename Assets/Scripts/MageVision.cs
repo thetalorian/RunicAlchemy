@@ -119,15 +119,12 @@ public class MageVision : MonoBehaviour {
         //
         // Display - Actual info to display for this item.
 
-        if (currentTarget.mvType == "Radial") {
-            CreateElementsRadial();
-        }
 
-        if (currentTarget.mvType == "Grid") {
-            CreateElementsGrid();
-        }
-        if (currentTarget.mvType == "Display") {
+        // Determine Display type.
+        if (currentTarget.upgradableStats.Count > 0 || currentTarget.bonuses.Count > 0) {
             CreateElementsDisplay();
+        } else {
+            CreateElementsRadial();
         }
 
         GameObject newUIElement;
@@ -175,7 +172,7 @@ public class MageVision : MonoBehaviour {
                 newUIElement = Instantiate(currentTarget.parent.buttonPrefab);
                 uiElements.Add(newUIElement);
                 newUIElement.transform.SetParent(inspectionCanvas.transform, false);
-                newUIElement.name = "UI-" + siblings[prev];
+                newUIElement.name = "UI-" + siblings[prev].name;
                 newUIElementUI = newUIElement.GetComponent<UIElement>();
                 newUIElementUI.Customize(siblings[prev]);
                 newUIElement.transform.localPosition = new Vector3(-300, 0, 0);
@@ -188,45 +185,8 @@ public class MageVision : MonoBehaviour {
             }
         }
             
-//        Debug.Log("Creating some motes!");
-//        GameObject newMote;
-//        miMote newMoteMI;
-//        Renderer newMoteRenderer;
-//        float theta = (2 * Mathf.PI / runes.Count);
-//        float xPos;
-//        float yPos;
-//        for (int i = 0; i < runes.Count; i++)
-//        {
-//            Rune rune = runes[i];
-//            Debug.Log("Making one for " + rune.name);
-//            newMote = Instantiate(childPrefab);
-//            newMote.transform.parent = gameObject.transform;
-//            newMote.name = "Mote-" + rune.name;
-//            newMoteMI = newMote.GetComponent<miMote>();
-//            newMoteMI.SetParent(this);
-//            newMoteMI.SetFocus(focus);
-
-//            newMoteRenderer = newMote.GetComponentInChildren<Renderer>();
-//            newMoteRenderer.material.SetColor("_Color", rune.element.groupColor);
-
-//            children.Add(newMoteMI);
-
- //           // Set positioning
-//            if (runes.Count > 1)
-//            {
-//                xPos = Mathf.Sin(theta * i);
-//                yPos = Mathf.Cos(theta * i);
-//                newMote.transform.localPosition = new Vector3(xPos * distance, yPos * distance, above);
-//            }
-//            else
-//            {
-//                newMote.transform.localPosition = new Vector3(0, 0, above);
-//            }
-//            newMote.transform.LookAt(focus.transform);
-
-//        }
-
     }
+
     private void CreateElementsRadial(){
         GameObject newUIElement;
         UIElement newUIElementUI;
@@ -263,14 +223,68 @@ public class MageVision : MonoBehaviour {
 
     }
 
-    private void CreateElementsGrid() {
-
-
-    }
-
     private void CreateElementsDisplay() {
-        
+      // For the display layout we want to put the children in a line at the bottom
+        // and leave room for upgradable stats and bonuses in the middle.
+        GameObject newUIElement;
+        UIElement newUIElementUI;
+        Button newUIElementButton;
+
+        // Children First.
+        // Let's make a line across the bottom of the screen
+        RectTransform inspectorRect = inspectionCanvas.GetComponent<RectTransform>();
+        float lineWidth = inspectorRect.rect.width * 0.8f;
+        float spaceWidth = lineWidth / currentTarget.children.Count;
+        float xPos;
+
+        float height = inspectorRect.rect.height * 0.3f;
+
+        for (int i = 0; i < currentTarget.children.Count; i++)
+        {
+            Debug.Log("Has child:" + currentTarget.children[i]);
+            MagicItem child = currentTarget.children[i];
+            newUIElement = Instantiate(child.buttonPrefab);
+            uiElements.Add(newUIElement);
+            newUIElement.transform.SetParent(inspectionCanvas.transform, false);
+            newUIElement.name = "UI-" + child.name;
+            newUIElementUI = newUIElement.GetComponent<UIElement>();
+            newUIElementUI.Customize(child);
+
+            newUIElementButton = newUIElement.GetComponent<Button>();
+            newUIElementButton.onClick.AddListener(() => ChangeTarget(child));
+
+            xPos = 0 - (lineWidth / 2) + (spaceWidth * i) + (spaceWidth / 2);
+            newUIElement.transform.localPosition = new Vector3(xPos, -height, 0f);
+        }
+
+        // Now we need to make the upgrades.
+        float theta = (2 * Mathf.PI / currentTarget.upgradableStats.Count);
+        float yPos;
+        float distance = Mathf.Min(inspectorRect.rect.width, inspectorRect.rect.height) / 8;
+        for (int i = 0; i < currentTarget.upgradableStats.Count; i++)
+        {
+            Debug.Log("Has upgrade:" + currentTarget.upgradableStats[i].upgradeName);
+            UpgradableStat upgradable = currentTarget.upgradableStats[i];
+            newUIElement = Instantiate(currentTarget.upgradePrefab);
+            uiElements.Add(newUIElement);
+            newUIElement.transform.SetParent(inspectionCanvas.transform, false);
+            newUIElement.name = "Uprade-" + upgradable.upgradeName;
+            newUIElementUI = newUIElement.GetComponent<UIElement>();
+            newUIElementUI.Customize(upgradable);
+
+            //newUIElementButton = newUIElement.GetComponentInChildren<Button>();
+            //newUIElementButton.onClick.AddListener(upgradable.Upgrade);
+
+
+            if (currentTarget.upgradableStats.Count > 1)
+            {
+                xPos = Mathf.Sin(theta * i);
+                yPos = Mathf.Cos(theta * i);
+                newUIElement.transform.localPosition = new Vector3(xPos * distance, yPos * distance, 0);
+            }
+        }
     }
+
     public void DestroyElements()
     {
         foreach (GameObject uiElement in uiElements)

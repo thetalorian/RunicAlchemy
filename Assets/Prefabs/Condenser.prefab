@@ -132,6 +132,7 @@ MonoBehaviour:
   childPrefab: {fileID: 0}
   camPosition: {x: 0, y: 0, z: 0}
   buttonPrefab: {fileID: 0}
+  upgradePrefab: {fileID: 0}
   mvType: 
   hasMesh: 0
   runeTier: {fileID: 0}
@@ -157,6 +158,8 @@ MonoBehaviour:
     type: 2}
   camPosition: {x: 0, y: 0, z: 0}
   buttonPrefab: {fileID: 1167461700740114, guid: 064e8bd79ab4c430c8beef7dab20f1c7,
+    type: 2}
+  upgradePrefab: {fileID: 1227014527287980, guid: 524ec24295be443cca3a5df7a6e5a496,
     type: 2}
   mvType: Radial
   hasMesh: 1

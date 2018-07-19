@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIElement : MonoBehaviour {
+public class UIButton : UIElement {
 
 	// Use this for initialization
 	void Start () {
@@ -15,11 +15,10 @@ public class UIElement : MonoBehaviour {
 		
 	}
 
-    public virtual void Customize(MagicItem target) {
-
-    }
-
-    public virtual void Customize(UpgradableStat target)
+    public override void Customize(MagicItem target)
     {
+        Text buttonText = GetComponentInChildren<Text>();
+        buttonText.text = target.name;
     }
+
 }

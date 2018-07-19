@@ -17,8 +17,11 @@ public class MagicItem : MonoBehaviour {
     public Vector3 camPosition;
     [SerializeField]
     public GameObject buttonPrefab;
+    public GameObject upgradePrefab;
     [SerializeField]
     public string mvType;
+    public List<UpgradableStat> upgradableStats = new List<UpgradableStat>();
+    public List<Bonuses> bonuses = new List<Bonuses>();
 
     public bool hasMesh;
     
@@ -92,4 +95,27 @@ public class MagicItem : MonoBehaviour {
         }
         children.Clear();
     }
+}
+
+
+public class UpgradableStat {
+
+    public int level = 1;
+    public int cost = 1;
+    public string upgradeName;
+    public int growth = 1;
+
+    public UpgradableStat(string name){
+        upgradeName = name;
+    }
+
+    public void Upgrade() {
+        level++;
+        cost += growth;
+    }
+}
+
+public class Bonuses {
+    public int level;
+    public int cost;
 }

@@ -15,19 +15,25 @@ public class miCondenser : MagicItem {
     [SerializeField]
     Focus focus;
 
+    UpgradableStat speed;
+    UpgradableStat max;
+
     // Use this for initialization
     void Start () {
-		
+        speed = new UpgradableStat("Speed");
+        max = new UpgradableStat("Max");
+        upgradableStats.Add(speed);
+        upgradableStats.Add(max);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
-    public void SetRunes(RuneTier runeTier)
+    public void SetRunes(RuneTier newRuneTier)
     {
-        runeTier = runeTier;
+        runeTier = newRuneTier;
         runes = runeTier.GetRunes();
     }
 
