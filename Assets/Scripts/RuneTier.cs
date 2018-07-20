@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuneTier : MonoBehaviour {
+[CreateAssetMenu]
+public class RuneTier: ScriptableObject {
 
     // Object type for runes.
 
     public Sprite tierImage;
-    public string tierName;
     public List<Rune> runes;
     public Color groupColor;
 

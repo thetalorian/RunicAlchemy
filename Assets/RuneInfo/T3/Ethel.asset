@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a59445f33fb341b3946e311c02b65ca, type: 3}
+  m_Name: Ethel
+  m_EditorClassIdentifier: 
+  level: 0
+  runename: 
+  sprite: {fileID: 21300000, guid: 15b998020ec394a54b28b8502c30af9c, type: 3}
+  tier: {fileID: 11400000, guid: fee33c197007446a59b41c88e48213f8, type: 2}
+  element: {fileID: 11400000, guid: dc44a544ec02e4ed5ac017883cfc0c80, type: 2}

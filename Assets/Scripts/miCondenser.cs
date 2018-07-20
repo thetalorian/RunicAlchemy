@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class miCondenser : MagicItem {
 
+    [Header("Condenser Settings")]
     [SerializeField]
     RuneTier runeTier;
-    [SerializeField]
     List<Rune> runes = new List<Rune>();
     [SerializeField]
-    float distance;
+    float moteRadius;
     [SerializeField]
-    float above;
+    float moteProtrusion;
     [SerializeField]
     Focus focus;
 
     [SerializeField]
     protected GameObject EmitterPrefab;
 
+    [SerializeField]
     UpgradableStat speed;
+    [SerializeField]
     UpgradableStat max;
 
     // Use this for initialization
@@ -48,8 +50,7 @@ public class miCondenser : MagicItem {
     public override void CreateChildren()
     {
         Debug.Log("Creating some motes!");
-        GameObject newMote;
-        miMote newMoteMI;
+        miMote newMote;
         MoteEmitter newEmitter;
         Renderer newMoteRenderer;
         float theta = (2 * Mathf.PI / runes.Count);
@@ -59,28 +60,28 @@ public class miCondenser : MagicItem {
         {
             Rune rune = runes[i];
             Debug.Log("Making one for " + rune.name);
-            newMote = Instantiate(childPrefab);
+            newMote = Instantiate(childPrefab).GetComponent<miMote>();
             newMote.transform.parent = gameObject.transform;
             newMote.name = "Mote-" + rune.name;
-            newMoteMI = newMote.GetComponent<miMote>();
-            newMoteMI.SetParent(this);
-            newMoteMI.SetFocus(focus);
+            newMote.SetParent(this);
+            newMote.SetFocus(focus);
+            newMote.SetRune(rune);
 
             newMoteRenderer = newMote.GetComponentInChildren<Renderer>();
             newMoteRenderer.material.SetColor("_Color", rune.element.groupColor);
             
-            children.Add(newMoteMI);
+            children.Add(newMote);
 
             // Set positioning
             if (runes.Count > 1)
             {
                 xPos = Mathf.Sin(theta * i);
                 yPos = Mathf.Cos(theta * i);
-                newMote.transform.localPosition = new Vector3(xPos * distance, yPos * distance, above);
+                newMote.transform.localPosition = new Vector3(xPos * moteRadius, yPos * moteRadius, moteProtrusion);
             }
             else
             {
-                newMote.transform.localPosition = new Vector3(0, 0, above);
+                newMote.transform.localPosition = new Vector3(0, 0, moteProtrusion);
             }
 
             // Create the connected Emitter
@@ -88,10 +89,11 @@ public class miCondenser : MagicItem {
             newEmitter.gameObject.transform.SetParent(focus.emitters.transform,false);
             newEmitter.gameObject.name = "MoteEmitter-" + rune.name;
             newEmitter.SetFocus(focus);
-            newMoteMI.SetEmitter(newEmitter);
+            newEmitter.SetMote(newMote);
+            newMote.SetEmitter(newEmitter);
 
             newMote.transform.LookAt(focus.transform);
-
+            helpers.Add(newEmitter.gameObject);
         }
 
     }

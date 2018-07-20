@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1533c9bb339a49d6a5769bc443a4862, type: 3}
+  m_Name: Earth
+  m_EditorClassIdentifier: 
+  elementImage: {fileID: 0}
+  elementName: 
+  runes:
+  - {fileID: 11400000, guid: 01122cd69bd34419fafbefbdc980fb35, type: 2}
+  - {fileID: 11400000, guid: 6b52386f70b73465c9c1cd68ec41dc06, type: 2}
+  - {fileID: 11400000, guid: 6b1afd577955e4dd0b0547632409734b, type: 2}
+  - {fileID: 11400000, guid: 47ff70fb8616d43d5bd1c04b026cee84, type: 2}
+  - {fileID: 11400000, guid: 1d327180cca754d0db5e078d3e3a404c, type: 2}
+  - {fileID: 11400000, guid: 20e8e55b7188c4f3ba36470c86427b7a, type: 2}
+  groupColor: {r: 0.8, g: 0.8, b: 0, a: 1}

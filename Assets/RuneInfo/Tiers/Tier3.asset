@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d910d0b6386cc4fd2ad03fe3f3e3525e, type: 3}
+  m_Name: Tier3
+  m_EditorClassIdentifier: 
+  tierImage: {fileID: 0}
+  runes:
+  - {fileID: 11400000, guid: d1b5eea40fbf740efa03d0b55358186f, type: 2}
+  - {fileID: 11400000, guid: 5622bea4b78cb46e6ad6ec06a5ad882b, type: 2}
+  - {fileID: 11400000, guid: 6b1afd577955e4dd0b0547632409734b, type: 2}
+  - {fileID: 11400000, guid: 3d7f85fbebcff476dbea7f666f722923, type: 2}
+  - {fileID: 11400000, guid: 539bb0292258a46c0bed75ae66469aad, type: 2}
+  - {fileID: 11400000, guid: 590a8d551fda44ac09a3ee380acb2c03, type: 2}
+  groupColor: {r: 1, g: 1, b: 0, a: 1}

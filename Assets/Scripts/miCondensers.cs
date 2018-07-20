@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class miCondensers : MagicItem {
 
+    [Header("Condensers Settings")]
     [SerializeField]
     List<RuneTier> runeTiers = new List<RuneTier>();
     [SerializeField]
-    float distance;
+    float displacementRadius;
     [SerializeField]
-    float above;
+    float condenserHeight;
     [SerializeField]
     Focus focus;
 
@@ -22,12 +23,15 @@ public class miCondensers : MagicItem {
 	void Update () {
 		
 	}
+    public void SetFocus(Focus newFocus)
+    {
+        focus = newFocus;
+    }
 
     public override void CreateChildren()
     {
         Debug.Log("Creating some condensers!");
-        GameObject newCondenser;
-        miCondenser newCondenserMI;
+        miCondenser newCondenser;
         Renderer newCondenserRenderer;
         float theta = (2 * Mathf.PI / (runeTiers.Count + 2));
         float xPos;
@@ -37,14 +41,13 @@ public class miCondensers : MagicItem {
         {
             RuneTier runeTier = runeTiers[i];
             Debug.Log("Making one for " + runeTier.name);
-            newCondenser = Instantiate(childPrefab);
+            newCondenser = Instantiate(childPrefab).GetComponent<miCondenser>();
             newCondenser.transform.parent = gameObject.transform;
             newCondenser.name = "Condenser-" + runeTier.name;
-            newCondenserMI = newCondenser.GetComponent<miCondenser>();
-            newCondenserMI.SetParent(this);
-            newCondenserMI.SetRunes(runeTier);
-            newCondenserMI.SetFocus(focus);
-            children.Add(newCondenserMI);
+            newCondenser.SetParent(this);
+            newCondenser.SetRunes(runeTier);
+            newCondenser.SetFocus(focus);
+            children.Add(newCondenser);
 
             newCondenserRenderer = newCondenser.GetComponentInChildren<Renderer>();
             newCondenserRenderer.material.SetColor("_Color", runeTier.groupColor);
@@ -54,14 +57,13 @@ public class miCondensers : MagicItem {
             if (i == 0)
             {
                 // This is the Tier0 Condenser, it behaves differently
-                newCondenser.transform.localPosition = new Vector3(0, above * 1.5f, 0);
+                newCondenser.transform.localPosition = new Vector3(0, condenserHeight * 1.5f, 0);
             }
             else
             {
                 xPos = Mathf.Sin(theta * cPos);
                 zPos = Mathf.Cos(theta * cPos);
-                Debug.Log("xPos:" + xPos.ToString() + " zPos: " + zPos.ToString());
-                newCondenser.transform.localPosition = new Vector3(xPos * distance, above, zPos * distance);
+                newCondenser.transform.localPosition = new Vector3(xPos * displacementRadius, condenserHeight, zPos * displacementRadius);
                 cPos++;
                 // Skip slots 2 and 5
                 if (cPos == 2 || cPos == 5) {
@@ -69,7 +71,7 @@ public class miCondensers : MagicItem {
                 }
             }
             newCondenser.transform.LookAt(focus.transform);
-            newCondenserMI.CreateChildren();
+            newCondenser.CreateChildren();
         }
 
     }

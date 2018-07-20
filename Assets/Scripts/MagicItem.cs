@@ -2,29 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagicItem : MonoBehaviour {
+public class MagicItem : MonoBehaviour
+{
     // A magic item is something that is 
     // viewable with Mage vision
-    [SerializeField]
-    public MagicItem parent;
-    [SerializeField]
+    [Header("Magic Item Settings")]
+    public MagicItem mageVisionParent;
     public List<MagicItem> children = new List<MagicItem>();
-    [SerializeField]
-    protected int currentChildIndex;
-    [SerializeField]
-    protected GameObject childPrefab;
+    public List<GameObject> helpers = new List<GameObject>();
     [SerializeField]
     public Vector3 camPosition;
+    public bool hasMesh;
+
+    [Space]
+    [Header("Magic Item Prefabs")]
     [SerializeField]
-    public GameObject buttonPrefab;
-    public GameObject upgradePrefab;
-    [SerializeField]
-    public string mvType;
+    protected GameObject childPrefab;
+    [Space]
+    [Header("Magic Item Lists")]
+    public List<Displays> displays = new List<Displays>();
     public List<UpgradableStat> upgradableStats = new List<UpgradableStat>();
     public List<Bonuses> bonuses = new List<Bonuses>();
 
-    public bool hasMesh;
-    
+
     // Magic Items are set up to allow
     // for transition to and from surrounding
     // magic items.
@@ -79,7 +79,7 @@ public class MagicItem : MonoBehaviour {
 
     public void SetParent(MagicItem newParent)
     {
-        parent = newParent;
+        mageVisionParent = newParent;
     }
 
     public virtual void CreateChildren()
@@ -87,35 +87,22 @@ public class MagicItem : MonoBehaviour {
 
     }
 
+    public virtual void StatUpgraded(UpgradableStat stat)
+    {
+        
+    }
+
     public void KillChildren()
     {
         foreach(MagicItem child in children)
         {
+            child.KillChildren();
             DestroyImmediate(child.gameObject);
         }
         children.Clear();
+
     }
 }
 
 
-public class UpgradableStat {
 
-    public int level = 1;
-    public int cost = 1;
-    public string upgradeName;
-    public int growth = 1;
-
-    public UpgradableStat(string name){
-        upgradeName = name;
-    }
-
-    public void Upgrade() {
-        level++;
-        cost += growth;
-    }
-}
-
-public class Bonuses {
-    public int level;
-    public int cost;
-}

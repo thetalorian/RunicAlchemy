@@ -5,37 +5,55 @@ using UnityEngine;
 public class MoteEmitter : MonoBehaviour {
 
     [SerializeField]
-    private ParticleSystem particleSystem;
+    private ParticleSystem moteParticleSystem;
     [SerializeField]
     private miMote miMote;
     [SerializeField]
-    private Focus focus; 
+    private Focus focus;
+
+    List<ParticleCollisionEvent> collisionEvents;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start () 
+    {
+        moteParticleSystem = gameObject.GetComponent<ParticleSystem>();
+        collisionEvents = new List<ParticleCollisionEvent>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
         MoveMotes();
 	}
 
-    public void SetMote(miMote mote) {
+    public void SetMote(miMote mote) 
+    {
         miMote = mote;
     }
 
-    public void EmitMote() {
-        particleSystem.Emit(1);
+    public void EmitMote() 
+    {
+        moteParticleSystem.Emit(1);
     }
 
-    public void SetFocus(Focus newFocus) {
+    public void SetFocus(Focus newFocus) 
+    {
         focus = newFocus;
     }
 
-    public void MoveMotes() {
-        ParticleSystem.Particle[] particles = new ParticleSystem.Particle[particleSystem.main.maxParticles];
-        int particleCount = particleSystem.GetParticles(particles);
+    private void OnParticleCollision(GameObject other)
+    {
+        ParticlePhysicsExtensions.GetCollisionEvents(moteParticleSystem, other, collisionEvents);
+        for (int i = 0; i < collisionEvents.Count; i++)
+        {
+            focus.well.addMagic(miMote.GetCharge());
+        }
+    }
+
+    public void MoveMotes() 
+    {
+        ParticleSystem.Particle[] particles = new ParticleSystem.Particle[moteParticleSystem.main.maxParticles];
+        int particleCount = moteParticleSystem.GetParticles(particles);
 
         float drawSpeed = focus.GetSpeed();
         float step = drawSpeed * Time.deltaTime;
@@ -46,7 +64,7 @@ public class MoteEmitter : MonoBehaviour {
                 //particles[i].position = Vector3.MoveTowards(particles[i].position, focus.transform.localPosition, step);
                 particles[i].position = Vector3.MoveTowards(particles[i].position, new Vector3(0,0,0), step);
             }
-            particleSystem.SetParticles(particles, particleCount);
+            moteParticleSystem.SetParticles(particles, particleCount);
         }
     }
 }

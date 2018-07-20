@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Focus : MonoBehaviour {
+public class Focus : MagicItem {
 
     // Connect the storage crystal
-    public Crystal well;
+    public miCrystal well;
 
     // Heat Settings
-    public GameObject heatBar;
-    Image heatBarFill;
+    public Slider heatBar;
     int heat; // Current heat
     float maxheat; // Maximum heat
     bool overheated; // Overheat status
+    public Gradient heatGradient;
 
     // Draw Settings
     bool isDrawing; // Used to determine if the player is currently drawing
@@ -32,8 +32,11 @@ public class Focus : MonoBehaviour {
         drawAmount = 0;
         heat = 0;
         maxheat = 250f;
+        heatBar.value = 0f;
+        ColorBlock hbcb = heatBar.colors;
+        hbcb.disabledColor = heatGradient.Evaluate(0f);
+        heatBar.colors = hbcb;
         overheated = false;
-        heatBarFill = heatBar.GetComponent<Image>();
     }
     	
 	// Update is called once per frame
@@ -64,15 +67,25 @@ public class Focus : MonoBehaviour {
         heat += amount;
         //Debug.Log(heat);
         float heatpercent = heat / maxheat;
-        heatBarFill.fillAmount = heatpercent;
+        heatBar.value = heatpercent;
+        ColorBlock hbcb = heatBar.colors;
+        if (overheated)
+        {
+            hbcb.disabledColor = heatGradient.Evaluate(1);
+        }
+        else
+        {
+            hbcb.disabledColor = heatGradient.Evaluate(heatpercent);
+        }
+        heatBar.colors = hbcb;
         if (heat >= maxheat){
             overheated = true;
-            heatBarFill.color = Color.red;
+            //heatBarFill.color = Color.red;
         }
         if (overheated && heat <= 0){
             heat = 0;
             overheated = false;
-            heatBarFill.color = Color.magenta;
+            //heatBarFill.color = Color.magenta;
         }
         if (heat < 0){
             heat = 0;

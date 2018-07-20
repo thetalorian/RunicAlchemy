@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a59445f33fb341b3946e311c02b65ca, type: 3}
+  m_Name: Gar
+  m_EditorClassIdentifier: 
+  level: 0
+  runename: 
+  sprite: {fileID: 21300000, guid: ff904af044f7248b2a5c03f6a8c72d5e, type: 3}
+  tier: {fileID: 11400000, guid: d0e08ca5e38784eb2bd7786a11941bfe, type: 2}
+  element: {fileID: 11400000, guid: dc44a544ec02e4ed5ac017883cfc0c80, type: 2}

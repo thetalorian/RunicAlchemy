@@ -31,7 +31,7 @@ public class UIUpgradableStat : UIElement {
     }
 
     private void ResetDisplay() {
-        costText.text = targetStat.cost.ToString();
+        costText.text = targetStat.GetCost().ToString();
         levelText.text = targetStat.level.ToString();
     }
 
@@ -44,7 +44,7 @@ public class UIUpgradableStat : UIElement {
         Debug.Log("Customizing Upgradable Stat: " + target.upgradeName);
         targetStat = target;
         Debug.Log(labelText);
-        labelText.text = target.upgradeName;
+        labelText.text = target.displayName;
         upgradeButton.onClick.AddListener(Upgrade);
         ResetDisplay();
     }

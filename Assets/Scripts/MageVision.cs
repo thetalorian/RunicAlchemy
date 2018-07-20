@@ -17,7 +17,7 @@ public class MageVision : MonoBehaviour {
     [SerializeField]
     private bool inspecting;
     [SerializeField]
-    private Camera camera;
+    private Camera mainCamera;
     [SerializeField]
     private MagicItem currentTarget;
     [SerializeField]
@@ -25,9 +25,14 @@ public class MageVision : MonoBehaviour {
     [SerializeField]
     private Focus focus;
     [SerializeField]
-    List<GameObject> uiElements;
-
-
+    List<UIElement> uiElements;
+    [Header("Mage Vision Prefabs")]
+    [SerializeField]
+    GameObject buttonPrefab;
+    [SerializeField]
+    GameObject upgradePrefab;
+    [SerializeField]
+    GameObject displayPrefab;
 
     // Ok, let's prototype this thing
     // out and see what we need.
@@ -50,7 +55,6 @@ public class MageVision : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        currentTarget = gameObject.GetComponent<MagicItem>();
         CreateElements();
         inspecting = true;
         ToggleInspector();
@@ -63,12 +67,13 @@ public class MageVision : MonoBehaviour {
 
     public void ToggleInspector ()
     {
-        if (inspectionCanvas.enabled)
+        if (inspecting)
         {
             inspectionCanvas.enabled = false;
             navigationCanvas.enabled = false;
             gameCanvas.enabled = true;
             CamToPlayer();
+            inspecting = false;
         }
         else
         {
@@ -76,6 +81,7 @@ public class MageVision : MonoBehaviour {
             navigationCanvas.enabled = true;
             gameCanvas.enabled = false;
             RefreshCam();
+            inspecting = true;
         }
     }
 
@@ -101,15 +107,15 @@ public class MageVision : MonoBehaviour {
     }
 
     void CamToInspector() {
-        camera.transform.parent = currentTarget.transform;
-        camera.GetComponent<CameraZoomer>().inspecting = true;
-        camera.transform.LookAt(currentTarget.transform);
+        mainCamera.transform.parent = currentTarget.transform;
+        mainCamera.GetComponent<CameraZoomer>().inspecting = true;
+        mainCamera.transform.LookAt(currentTarget.transform);
     }
 
     void CamToPlayer() {
-        camera.transform.parent = player.transform;
-        camera.GetComponent<CameraZoomer>().inspecting = false;
-        camera.transform.LookAt(focus.transform);
+        mainCamera.transform.parent = player.transform;
+        mainCamera.GetComponent<CameraZoomer>().inspecting = false;
+        mainCamera.transform.LookAt(focus.transform);
     }
 
     public void CreateElements()
@@ -141,27 +147,25 @@ public class MageVision : MonoBehaviour {
             CreateElementsRadial();
         }
 
-        GameObject newUIElement;
-        UIElement newUIElementUI;
+        UIElement newUIElement;
         Button newUIElementButton;
-        if (currentTarget.parent != null) {
+        if (currentTarget.mageVisionParent != null) {
             // Create a "go to parent" back button
-            newUIElement = Instantiate(currentTarget.parent.buttonPrefab);
+            //newUIElement = Instantiate(currentTarget.mageVisionParent.buttonPrefab).GetComponent<UIElement>();
+            newUIElement = Instantiate(buttonPrefab).GetComponent<UIElement>();
             uiElements.Add(newUIElement);
             newUIElement.transform.SetParent(navigationCanvas.transform, false);
-            newUIElement.name = "UI-" + currentTarget.parent.name;
-            newUIElementUI = newUIElement.GetComponent<UIElement>();
-            newUIElementUI.Customize(currentTarget.parent);
+            newUIElement.name = "UI-" + currentTarget.mageVisionParent.name;
+            newUIElement.Customize(currentTarget.mageVisionParent);
             newUIElement.transform.localPosition = new Vector3(0, 200, 0);
 
-            newUIElementButton = newUIElement.GetComponent<Button>();
-            newUIElementButton.onClick.AddListener(() => ChangeTarget(currentTarget.parent));
+            newUIElementButton = newUIElement.gameObject.GetComponent<Button>();
+            newUIElementButton.onClick.AddListener(() => ChangeTarget(currentTarget.mageVisionParent));
 
-
-            if (currentTarget.parent.children.Count > 1) {
+            if (currentTarget.mageVisionParent.children.Count > 1) {
                 // More than one child on the parent
                 // means we have siblings. Set up the prev/next buttons.
-                List<MagicItem> siblings = currentTarget.parent.children;
+                List<MagicItem> siblings = currentTarget.mageVisionParent.children;
                 int currentTargetIndex = siblings.IndexOf(currentTarget);
                 Debug.Log("Current index: " + currentTargetIndex.ToString());
                 int next = currentTargetIndex + 1;
@@ -172,38 +176,35 @@ public class MageVision : MonoBehaviour {
                 if (prev < 0){
                     prev = siblings.Count - 1;
                 }
-                newUIElement = Instantiate(currentTarget.parent.buttonPrefab);
+                //newUIElement = Instantiate(currentTarget.mageVisionParent.buttonPrefab).GetComponent<UIElement>();
+                newUIElement = Instantiate(buttonPrefab).GetComponent<UIElement>();
                 uiElements.Add(newUIElement);
                 newUIElement.transform.SetParent(navigationCanvas.transform, false);
                 newUIElement.name = "UI-" + siblings[next].name;
-                newUIElementUI = newUIElement.GetComponent<UIElement>();
-                newUIElementUI.Customize(siblings[next]);
+                newUIElement.Customize(siblings[next]);
                 newUIElement.transform.localPosition = new Vector3(300, 0, 0);
 
                 newUIElementButton = newUIElement.GetComponent<Button>();
                 newUIElementButton.onClick.AddListener(() => ChangeTarget(siblings[next]));
 
-                newUIElement = Instantiate(currentTarget.parent.buttonPrefab);
+                //newUIElement = Instantiate(currentTarget.mageVisionParent.buttonPrefab).GetComponent<UIElement>();
+                newUIElement = Instantiate(buttonPrefab).GetComponent<UIElement>();
                 uiElements.Add(newUIElement);
                 newUIElement.transform.SetParent(navigationCanvas.transform, false);
                 newUIElement.name = "UI-" + siblings[prev].name;
-                newUIElementUI = newUIElement.GetComponent<UIElement>();
-                newUIElementUI.Customize(siblings[prev]);
+                newUIElement.Customize(siblings[prev]);
                 newUIElement.transform.localPosition = new Vector3(-300, 0, 0);
 
                 newUIElementButton = newUIElement.GetComponent<Button>();
                 newUIElementButton.onClick.AddListener(() => ChangeTarget(siblings[prev]));
-
-
-
             }
         }
             
     }
 
     private void CreateElementsRadial(){
-        GameObject newUIElement;
-        UIElement newUIElementUI;
+        // Create a Radial display pattern for buttons.
+        UIElement newUIElement;
         Button newUIElementButton;
         float theta = (2 * Mathf.PI / currentTarget.children.Count);
         float xPos;
@@ -213,35 +214,29 @@ public class MageVision : MonoBehaviour {
 
         for (int i = 0; i < currentTarget.children.Count; i++)
         {
-            Debug.Log("Has child:" + currentTarget.children[i]);
             MagicItem child = currentTarget.children[i];
-            newUIElement = Instantiate(child.buttonPrefab);
+            //newUIElement = Instantiate(child.buttonPrefab).GetComponent<UIElement>();
+            newUIElement = Instantiate(buttonPrefab).GetComponent<UIElement>();
             uiElements.Add(newUIElement);
             newUIElement.transform.SetParent(navigationCanvas.transform, false);
             newUIElement.name = "UI-" + child.name;
-            newUIElementUI = newUIElement.GetComponent<UIElement>();
-            newUIElementUI.Customize(child);
+            newUIElement.Customize(child);
 
             newUIElementButton = newUIElement.GetComponent<Button>();
             newUIElementButton.onClick.AddListener(() => ChangeTarget(child));
-
 
             if (currentTarget.children.Count > 1) {
                 xPos = Mathf.Sin(theta * i);
                 yPos = Mathf.Cos(theta * i);
                 newUIElement.transform.localPosition = new Vector3(xPos * distance, yPos * distance, 0);
             }
-
         }
-
-
     }
 
     private void CreateElementsDisplay() {
-      // For the display layout we want to put the children in a line at the bottom
+        // For the display layout we want to put the children in a line at the bottom
         // and leave room for upgradable stats and bonuses in the middle.
-        GameObject newUIElement;
-        UIElement newUIElementUI;
+        UIElement newUIElement;
         Button newUIElementButton;
 
         // Children First.
@@ -255,14 +250,13 @@ public class MageVision : MonoBehaviour {
 
         for (int i = 0; i < currentTarget.children.Count; i++)
         {
-            Debug.Log("Has child:" + currentTarget.children[i]);
             MagicItem child = currentTarget.children[i];
-            newUIElement = Instantiate(child.buttonPrefab);
+            //newUIElement = Instantiate(child.buttonPrefab).GetComponent<UIElement>();
+            newUIElement = Instantiate(buttonPrefab).GetComponent<UIElement>();
             uiElements.Add(newUIElement);
             newUIElement.transform.SetParent(navigationCanvas.transform, false);
             newUIElement.name = "UI-" + child.name;
-            newUIElementUI = newUIElement.GetComponent<UIElement>();
-            newUIElementUI.Customize(child);
+            newUIElement.Customize(child);
 
             newUIElementButton = newUIElement.GetComponent<Button>();
             newUIElementButton.onClick.AddListener(() => ChangeTarget(child));
@@ -271,7 +265,12 @@ public class MageVision : MonoBehaviour {
             newUIElement.transform.localPosition = new Vector3(xPos, -height, 0f);
         }
 
-        // Now we need to make the upgrades.
+        // Now we need to make the Inspector.
+        //int totalInspectorItems;
+
+        // Note: Currently just doing upgrades, in a radial pattern
+        // This needs to be upgraded to show bonuses, upgrades, and display
+        // items in some kind of grid layout.
         float theta = (2 * Mathf.PI / currentTarget.upgradableStats.Count);
         float yPos;
         RectTransform inspectorRect = inspectionCanvas.GetComponent<RectTransform>();
@@ -280,16 +279,12 @@ public class MageVision : MonoBehaviour {
         {
             Debug.Log("Has upgrade:" + currentTarget.upgradableStats[i].upgradeName);
             UpgradableStat upgradable = currentTarget.upgradableStats[i];
-            newUIElement = Instantiate(currentTarget.upgradePrefab);
+            //newUIElement = Instantiate(currentTarget.upgradePrefab).GetComponent<UIElement>();
+            newUIElement = Instantiate(upgradePrefab).GetComponent<UIElement>();
             uiElements.Add(newUIElement);
             newUIElement.transform.SetParent(inspectionCanvas.transform, false);
             newUIElement.name = "Uprade-" + upgradable.upgradeName;
-            newUIElementUI = newUIElement.GetComponent<UIElement>();
-            newUIElementUI.Customize(upgradable);
-
-            //newUIElementButton = newUIElement.GetComponentInChildren<Button>();
-            //newUIElementButton.onClick.AddListener(upgradable.Upgrade);
-
+            newUIElement.Customize(upgradable);
 
             if (currentTarget.upgradableStats.Count > 1)
             {
@@ -302,9 +297,9 @@ public class MageVision : MonoBehaviour {
 
     public void DestroyElements()
     {
-        foreach (GameObject uiElement in uiElements)
+        foreach (UIElement uiElement in uiElements)
         {
-            Destroy(uiElement);
+            Destroy(uiElement.gameObject);
         }
         uiElements.Clear();
     }

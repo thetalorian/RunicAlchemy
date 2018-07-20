@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1533c9bb339a49d6a5769bc443a4862, type: 3}
+  m_Name: Water
+  m_EditorClassIdentifier: 
+  elementImage: {fileID: 0}
+  elementName: 
+  runes:
+  - {fileID: 11400000, guid: 25cd88fb47a384f75856cf99c75f21c8, type: 2}
+  - {fileID: 11400000, guid: dc8e5cf56b20c445bb0ff15fdcaa539f, type: 2}
+  - {fileID: 11400000, guid: 539bb0292258a46c0bed75ae66469aad, type: 2}
+  - {fileID: 11400000, guid: 71d786180e9f547d491a3110a261191e, type: 2}
+  - {fileID: 11400000, guid: 4d0f828256f5f4a51bfcf0660864c91c, type: 2}
+  - {fileID: 11400000, guid: bae33dfbff8a844ecb3299b85ba02aff, type: 2}
+  groupColor: {r: 0, g: 0, b: 0.8, a: 1}
