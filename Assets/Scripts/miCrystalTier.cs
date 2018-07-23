@@ -14,8 +14,6 @@ public class miCrystalTier : MagicItem {
     float offset;
     [SerializeField]
     float above;
-    [SerializeField]
-    Focus focus;
 
     [SerializeField]
     protected GameObject EmitterPrefab;
@@ -48,11 +46,6 @@ public class miCrystalTier : MagicItem {
         runes = runeTier.GetRunes();
     }
 
-    public void SetFocus(Focus newFocus)
-    {
-        focus = newFocus;
-    }
-
     public void SetOffset(float newOffset) {
         offset = newOffset;
     }
@@ -75,7 +68,6 @@ public class miCrystalTier : MagicItem {
             newCrystal.transform.SetParent(gameObject.transform, false);
             newCrystal.gameObject.name = "Crystal-" + rune.name;
             newCrystal.SetParent(this);
-            newCrystal.SetFocus(focus);
             newCrystal.SetRune(rune);
             children.Add(newCrystal);
 
@@ -86,7 +78,7 @@ public class miCrystalTier : MagicItem {
             if (rune.name == "Raw")
             {
                 newCrystal.isWell = true;
-                focus.well = newCrystal;
+                MagicChamber.Instance.SetWell(newCrystal);
             }
         }
 

@@ -23,8 +23,6 @@ public class MageVision : MonoBehaviour {
     [SerializeField]
     private Player player;
     [SerializeField]
-    private Focus focus;
-    [SerializeField]
     List<UIElement> uiElements;
     [Header("Mage Vision Prefabs")]
     [SerializeField]
@@ -115,7 +113,7 @@ public class MageVision : MonoBehaviour {
     void CamToPlayer() {
         mainCamera.transform.parent = player.transform;
         mainCamera.GetComponent<CameraZoomer>().inspecting = false;
-        mainCamera.transform.LookAt(focus.transform);
+        mainCamera.transform.LookAt(MagicChamber.Instance.focus.transform);
     }
 
     public void CreateElements()
@@ -161,6 +159,7 @@ public class MageVision : MonoBehaviour {
 
             newUIElementButton = newUIElement.gameObject.GetComponent<Button>();
             newUIElementButton.onClick.AddListener(() => ChangeTarget(currentTarget.mageVisionParent));
+            newUIElementButton.onClick.AddListener(() => AudioManager.instance.Play("ButtonClick"));
 
             if (currentTarget.mageVisionParent.children.Count > 1) {
                 // More than one child on the parent
@@ -186,6 +185,7 @@ public class MageVision : MonoBehaviour {
 
                 newUIElementButton = newUIElement.GetComponent<Button>();
                 newUIElementButton.onClick.AddListener(() => ChangeTarget(siblings[next]));
+                newUIElementButton.onClick.AddListener(() => AudioManager.instance.Play("ButtonClick"));
 
                 //newUIElement = Instantiate(currentTarget.mageVisionParent.buttonPrefab).GetComponent<UIElement>();
                 newUIElement = Instantiate(buttonPrefab).GetComponent<UIElement>();
@@ -197,6 +197,7 @@ public class MageVision : MonoBehaviour {
 
                 newUIElementButton = newUIElement.GetComponent<Button>();
                 newUIElementButton.onClick.AddListener(() => ChangeTarget(siblings[prev]));
+                newUIElementButton.onClick.AddListener(() => AudioManager.instance.Play("ButtonClick"));
             }
         }
             
@@ -224,6 +225,7 @@ public class MageVision : MonoBehaviour {
 
             newUIElementButton = newUIElement.GetComponent<Button>();
             newUIElementButton.onClick.AddListener(() => ChangeTarget(child));
+            newUIElementButton.onClick.AddListener(() => AudioManager.instance.Play("ButtonClick"));
 
             if (currentTarget.children.Count > 1) {
                 xPos = Mathf.Sin(theta * i);
@@ -260,6 +262,7 @@ public class MageVision : MonoBehaviour {
 
             newUIElementButton = newUIElement.GetComponent<Button>();
             newUIElementButton.onClick.AddListener(() => ChangeTarget(child));
+            newUIElementButton.onClick.AddListener(() => AudioManager.instance.Play("ButtonClick"));
 
             xPos = 0 - (lineWidth / 2) + (spaceWidth * i) + (spaceWidth / 2);
             newUIElement.transform.localPosition = new Vector3(xPos, -height, 0f);

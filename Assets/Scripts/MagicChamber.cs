@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//[ExecuteInEditMode]
 public class MagicChamber : MagicItem {
 
     [Header("Magic Chamber Prefabs")]
@@ -13,8 +14,34 @@ public class MagicChamber : MagicItem {
     GameObject crystalsPrefab;
     [SerializeField]
     GameObject altarsPrefab;
-    [SerializeField]
-    Focus focus;
+    [Space]
+    public Focus focus;
+    public miCrystal well;
+
+    private static MagicChamber _instance;
+    public static MagicChamber Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.Find("MagicChamber").GetComponent<MagicChamber>();
+            }
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        if (_instance == null)
+            _instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +56,12 @@ public class MagicChamber : MagicItem {
     {
         focus = newFocus;
     }
+
+    public void SetWell(miCrystal newWell)
+    {
+        well = newWell;
+    }
+
     public override void CreateChildren()
     {
         Debug.Log("Setting Up the Magic Chamber!");
@@ -46,7 +79,6 @@ public class MagicChamber : MagicItem {
         newCondensers.transform.SetParent(gameObject.transform, false);
         newCondensers.name = "Condensers";
         newCondensers.SetParent(this);
-        newCondensers.SetFocus(focus);
         children.Add(newCondensers);
         newCondensers.CreateChildren();
 
@@ -55,7 +87,6 @@ public class MagicChamber : MagicItem {
         newCrystals.transform.SetParent(gameObject.transform, false);
         newCrystals.name = "Crystals";
         newCrystals.SetParent(this);
-        newCrystals.SetFocus(focus);
         children.Add(newCrystals);
         newCrystals.CreateChildren();
 

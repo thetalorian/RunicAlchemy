@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class miCrystal : MagicItem {
 
-    [SerializeField]
-    Focus focus;
-
     [Header("Crystal Attributes")]
     [SerializeField]
     private int heldAmount;
@@ -123,11 +120,6 @@ public class miCrystal : MagicItem {
         {
             heldAmount = capacity;
         }
-    }
-
-    public void SetFocus(Focus newFocus)
-    {
-        focus = newFocus;
     }
 
     public void SetRune(Rune newRune)

@@ -10,8 +10,6 @@ public class miCrystals : MagicItem {
     float crystalRadius;
     [SerializeField]
     float above;
-    [SerializeField]
-    Focus focus;
 
     // Use this for initialization
     void Start()
@@ -24,16 +22,11 @@ public class miCrystals : MagicItem {
     {
 
     }
-    public void SetFocus(Focus newFocus)
-    {
-        focus = newFocus;
-    }
 
     public override void CreateChildren()
     {
         Debug.Log("Creating some crystal tiers!");
         miCrystalTier newCrystalTier;
-
 
         float offset = 0;
         for (int i = 0; i < runeTiers.Count; i++)
@@ -45,7 +38,6 @@ public class miCrystals : MagicItem {
             newCrystalTier.gameObject.name = "CrystalTier-" + runeTier.name;
             newCrystalTier.SetParent(this);
             newCrystalTier.SetRunes(runeTier);
-            newCrystalTier.SetFocus(focus);
             newCrystalTier.SetOffset(offset);
             offset -= 0.5f;
             children.Add(newCrystalTier);

@@ -6,8 +6,6 @@ public class CameraZoomer : MonoBehaviour {
 
     public float speed;
     public bool inspecting = false;
-    [SerializeField]
-    Focus focus;
 
 	// Use this for initialization
 	void Start () {
@@ -31,7 +29,7 @@ public class CameraZoomer : MonoBehaviour {
             Vector3 camTarget = transform.parent.position;
             float step = speed * 2 * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, camTarget, step);
-            transform.LookAt(focus.transform);
+            transform.LookAt(MagicChamber.Instance.focus.transform);
         }
 	}
 }

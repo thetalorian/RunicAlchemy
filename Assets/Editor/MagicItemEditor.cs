@@ -18,6 +18,10 @@ public class MagicItemEditor : Editor {
         {
             myScript.KillChildren();
         }
+        if (GUILayout.Button("Find Focus"))
+        {
+            myScript.FindFocus();
+        }
     }
 }
 

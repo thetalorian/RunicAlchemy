@@ -12,8 +12,6 @@ public class miCondenser : MagicItem {
     float moteRadius;
     [SerializeField]
     float moteProtrusion;
-    [SerializeField]
-    Focus focus;
 
     [SerializeField]
     protected GameObject EmitterPrefab;
@@ -42,11 +40,6 @@ public class miCondenser : MagicItem {
         runes = runeTier.GetRunes();
     }
 
-    public void SetFocus(Focus newFocus)
-    {
-        focus = newFocus;
-    }
-
     public override void CreateChildren()
     {
         Debug.Log("Creating some motes!");
@@ -64,7 +57,6 @@ public class miCondenser : MagicItem {
             newMote.transform.parent = gameObject.transform;
             newMote.name = "Mote-" + rune.name;
             newMote.SetParent(this);
-            newMote.SetFocus(focus);
             newMote.SetRune(rune);
 
             newMoteRenderer = newMote.GetComponentInChildren<Renderer>();
@@ -86,13 +78,12 @@ public class miCondenser : MagicItem {
 
             // Create the connected Emitter
             newEmitter = Instantiate(EmitterPrefab).GetComponent<MoteEmitter>();
-            newEmitter.gameObject.transform.SetParent(focus.emitters.transform,false);
+            newEmitter.gameObject.transform.SetParent(MagicChamber.Instance.focus.emitters.transform,false);
             newEmitter.gameObject.name = "MoteEmitter-" + rune.name;
-            newEmitter.SetFocus(focus);
             newEmitter.SetMote(newMote);
             newMote.SetEmitter(newEmitter);
 
-            newMote.transform.LookAt(focus.transform);
+            newMote.transform.LookAt(MagicChamber.Instance.focus.transform);
             helpers.Add(newEmitter.gameObject);
         }
 

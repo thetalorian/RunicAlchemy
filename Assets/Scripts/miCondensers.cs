@@ -11,8 +11,6 @@ public class miCondensers : MagicItem {
     float displacementRadius;
     [SerializeField]
     float condenserHeight;
-    [SerializeField]
-    Focus focus;
 
 	// Use this for initialization
 	void Start () {
@@ -23,10 +21,6 @@ public class miCondensers : MagicItem {
 	void Update () {
 		
 	}
-    public void SetFocus(Focus newFocus)
-    {
-        focus = newFocus;
-    }
 
     public override void CreateChildren()
     {
@@ -46,7 +40,6 @@ public class miCondensers : MagicItem {
             newCondenser.name = "Condenser-" + runeTier.name;
             newCondenser.SetParent(this);
             newCondenser.SetRunes(runeTier);
-            newCondenser.SetFocus(focus);
             children.Add(newCondenser);
 
             newCondenserRenderer = newCondenser.GetComponentInChildren<Renderer>();
@@ -70,7 +63,7 @@ public class miCondensers : MagicItem {
                     cPos++;
                 }
             }
-            newCondenser.transform.LookAt(focus.transform);
+            newCondenser.transform.LookAt(MagicChamber.Instance.focus.transform);
             newCondenser.CreateChildren();
         }
 

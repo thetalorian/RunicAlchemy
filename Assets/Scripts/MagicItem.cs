@@ -82,6 +82,16 @@ public class MagicItem : MonoBehaviour
         mageVisionParent = newParent;
     }
 
+    public virtual void DisplaySmall()
+    {
+        
+    }
+
+    public virtual void DisplayFull()
+    {
+        
+    }
+
     public virtual void CreateChildren()
     {
 
@@ -101,6 +111,12 @@ public class MagicItem : MonoBehaviour
         }
         children.Clear();
 
+    }
+
+    public void FindFocus()
+    {
+        Focus foundfocus = MagicChamber.Instance.focus;
+        Debug.Log("Found focus: " + foundfocus.name);
     }
 }
 
