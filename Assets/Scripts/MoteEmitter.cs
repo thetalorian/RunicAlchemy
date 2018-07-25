@@ -46,7 +46,7 @@ public class MoteEmitter : MonoBehaviour {
         ParticlePhysicsExtensions.GetCollisionEvents(moteParticleSystem, other, collisionEvents);
         for (int i = 0; i < collisionEvents.Count; i++)
         {
-            focus.well.addMagic(miMote.GetCharge());
+            MagicChamber.Instance.well.addMagic(miMote.GetCharge());
         }
     }
 
@@ -55,7 +55,7 @@ public class MoteEmitter : MonoBehaviour {
         ParticleSystem.Particle[] particles = new ParticleSystem.Particle[moteParticleSystem.main.maxParticles];
         int particleCount = moteParticleSystem.GetParticles(particles);
 
-        float drawSpeed = focus.GetSpeed();
+        float drawSpeed = MagicChamber.Instance.focus.GetSpeed();
         float step = drawSpeed * Time.deltaTime;
         if (drawSpeed > 0)
         {

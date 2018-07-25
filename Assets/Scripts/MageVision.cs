@@ -75,7 +75,9 @@ public class MageVision : MonoBehaviour {
         }
         else
         {
-            inspectionCanvas.enabled = true;
+            if (currentTarget.hasDisplay) {
+                inspectionCanvas.enabled = true;
+            }
             navigationCanvas.enabled = true;
             gameCanvas.enabled = false;
             RefreshCam();
@@ -139,9 +141,11 @@ public class MageVision : MonoBehaviour {
 
 
         // Determine Display type.
-        if (currentTarget.upgradableStats.Count > 0 || currentTarget.bonuses.Count > 0) {
+        if (currentTarget.hasDisplay) {
+            inspectionCanvas.enabled = true;
             CreateElementsDisplay();
         } else {
+            inspectionCanvas.enabled = false;
             CreateElementsRadial();
         }
 

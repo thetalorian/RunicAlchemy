@@ -126,21 +126,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d90ca16a4541bf49aacb350dff78c9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
+  mageVisionParent: {fileID: 0}
   children: []
-  currentChildIndex: 0
-  childPrefab: {fileID: 0}
+  helpers: []
   camPosition: {x: 0, y: 0, z: 0}
-  buttonPrefab: {fileID: 0}
-  upgradePrefab: {fileID: 0}
-  mvType: 
   hasMesh: 0
+  hasDisplay: 0
+  childPrefab: {fileID: 0}
+  displays: []
+  upgradableStats: []
+  bonuses: []
   runeTier: {fileID: 0}
-  runes: []
-  distance: 0
-  above: 0
-  focus: {fileID: 0}
+  moteRadius: 0
+  moteProtrusion: 0
   EmitterPrefab: {fileID: 0}
+  speed:
+    level: 0
+    initialCost: 0
+    upgradeName: 
+    displayName: 
+    growthLinear: 0
+    growthQuadratic: 0
+    miParent: {fileID: 0}
+  max:
+    level: 0
+    initialCost: 0
+    upgradeName: 
+    displayName: 
+    growthLinear: 0
+    growthQuadratic: 0
+    miParent: {fileID: 0}
 --- !u!114 &114758405496609582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,25 +167,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d90ca16a4541bf49aacb350dff78c9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
+  mageVisionParent: {fileID: 0}
   children: []
-  currentChildIndex: 0
+  helpers: []
+  camPosition: {x: 0, y: 0, z: 0}
+  hasMesh: 1
+  hasDisplay: 1
   childPrefab: {fileID: 1947659703429584, guid: 9b83f6f585d2b08489507a7441405266,
     type: 2}
-  camPosition: {x: 0, y: 0, z: 0}
-  buttonPrefab: {fileID: 1167461700740114, guid: 064e8bd79ab4c430c8beef7dab20f1c7,
-    type: 2}
-  upgradePrefab: {fileID: 1227014527287980, guid: 524ec24295be443cca3a5df7a6e5a496,
-    type: 2}
-  mvType: Radial
-  hasMesh: 1
+  displays: []
+  upgradableStats: []
+  bonuses: []
   runeTier: {fileID: 0}
-  runes: []
-  distance: 0.5
-  above: 0.15
-  focus: {fileID: 0}
+  moteRadius: 0
+  moteProtrusion: 0
   EmitterPrefab: {fileID: 1245123304674804, guid: 225eeb29b5e9a461f92fadf6eae12a78,
     type: 2}
+  speed:
+    level: 0
+    initialCost: 0
+    upgradeName: 
+    displayName: 
+    growthLinear: 0
+    growthQuadratic: 0
+    miParent: {fileID: 0}
+  max:
+    level: 0
+    initialCost: 0
+    upgradeName: 
+    displayName: 
+    growthLinear: 0
+    growthQuadratic: 0
+    miParent: {fileID: 0}
 --- !u!136 &136597543803200550
 CapsuleCollider:
   m_ObjectHideFlags: 1

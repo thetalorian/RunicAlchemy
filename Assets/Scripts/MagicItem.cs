@@ -13,6 +13,7 @@ public class MagicItem : MonoBehaviour
     [SerializeField]
     public Vector3 camPosition;
     public bool hasMesh;
+    public bool hasDisplay;
 
     [Space]
     [Header("Magic Item Prefabs")]

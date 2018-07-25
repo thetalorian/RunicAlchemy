@@ -99,12 +99,12 @@ MonoBehaviour:
   children: []
   helpers: []
   camPosition: {x: 0, y: 0, z: 0}
-  hasMesh: 0
+  hasMesh: 1
+  hasDisplay: 1
   childPrefab: {fileID: 0}
   displays: []
   upgradableStats: []
   bonuses: []
-  focus: {fileID: 0}
   heldAmount: 0
   rune: {fileID: 0}
   crystalTypes: {fileID: 11400000, guid: fa7437476512f4ec4a2c63134cb8fa47, type: 2}

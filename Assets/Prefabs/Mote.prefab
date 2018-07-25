@@ -125,18 +125,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfeeaa220572d1049876ef2603a9b5df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
+  mageVisionParent: {fileID: 0}
   children: []
-  currentChildIndex: 0
-  childPrefab: {fileID: 0}
+  helpers: []
   camPosition: {x: 0, y: 0, z: 0}
-  buttonPrefab: {fileID: 1167461700740114, guid: 064e8bd79ab4c430c8beef7dab20f1c7,
-    type: 2}
-  upgradePrefab: {fileID: 1227014527287980, guid: 524ec24295be443cca3a5df7a6e5a496,
-    type: 2}
-  mvType: Radial
   hasMesh: 1
+  hasDisplay: 1
+  childPrefab: {fileID: 0}
+  displays: []
+  upgradableStats: []
+  bonuses: []
   focus: {fileID: 0}
+  rune: {fileID: 0}
   moteEmitter: {fileID: 0}
 --- !u!135 &135854027216054652
 SphereCollider:
