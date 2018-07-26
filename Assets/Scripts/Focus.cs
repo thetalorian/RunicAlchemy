@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class Focus : MagicItem {
 
-    // Connect the storage crystal
-    public miCrystal well;
-
     // Heat Settings
     public Slider heatBar;
     int heat; // Current heat
@@ -120,7 +117,7 @@ public class Focus : MagicItem {
         if (drawcounter >= drawrate)
         {
             drawcounter = 0;
-            well.addMagic(drawAmount);
+            MagicChamber.Instance.well.addMagic(drawAmount);
         }
     }
 
@@ -131,17 +128,4 @@ public class Focus : MagicItem {
             return 0f;
         }
     }
-
-
-	private void OnTriggerEnter(Collider other)
-	{
-        WorldMote absorbed;
-        absorbed = other.GetComponent<WorldMote>();
-        if (absorbed) {
-            int charge = absorbed.getCharge();
-            well.addMagic(charge);
-            absorbed.die();
-        }
-	}
-
 }

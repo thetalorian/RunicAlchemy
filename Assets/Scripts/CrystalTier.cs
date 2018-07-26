@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class miCrystalTier : MagicItem {
+public class CrystalTier : MagicItem {
 
     [SerializeField]
     RuneTier runeTier;
@@ -15,19 +15,10 @@ public class miCrystalTier : MagicItem {
     [SerializeField]
     float above;
 
-    [SerializeField]
-    protected GameObject EmitterPrefab;
-
-    UpgradableStat speed;
-    UpgradableStat max;
-
     // Use this for initialization
     void Start()
     {
-        speed = new UpgradableStat("Speed");
-        max = new UpgradableStat("Max");
-        upgradableStats.Add(speed);
-        upgradableStats.Add(max);
+        
     }
 
     // Update is called once per frame
@@ -53,7 +44,7 @@ public class miCrystalTier : MagicItem {
     public override void CreateChildren()
     {
         Debug.Log("Creating some crystals!");
-        miCrystal newCrystal;
+        Crystal newCrystal;
 
         float theta = (2 * Mathf.PI / runes.Count);
         float xPos;
@@ -64,7 +55,7 @@ public class miCrystalTier : MagicItem {
             Rune rune = runes[i];
             Debug.Log("Making one for " + rune.name);
 
-            newCrystal = Instantiate(childPrefab).GetComponent<miCrystal>();
+            newCrystal = Instantiate(childPrefab).GetComponent<Crystal>();
             newCrystal.transform.SetParent(gameObject.transform, false);
             newCrystal.gameObject.name = "Crystal-" + rune.name;
             newCrystal.SetParent(this);

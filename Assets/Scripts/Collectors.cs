@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class miCondensers : MagicItem {
+public class Collectors : MagicItem {
 
-    [Header("Condensers Settings")]
+    [Header("Collectors Settings")]
     [SerializeField]
     List<RuneTier> runeTiers = new List<RuneTier>();
     [SerializeField]
     float displacementRadius;
     [SerializeField]
-    float condenserHeight;
+    float collectorHeight;
 
 	// Use this for initialization
 	void Start () {
@@ -24,9 +24,9 @@ public class miCondensers : MagicItem {
 
     public override void CreateChildren()
     {
-        Debug.Log("Creating some condensers!");
-        miCondenser newCondenser;
-        Renderer newCondenserRenderer;
+        Debug.Log("Creating some collectors!");
+        Collector newCollector;
+        Renderer newCollectorRenderer;
         float theta = (2 * Mathf.PI / (runeTiers.Count + 2));
         float xPos;
         float zPos;
@@ -35,36 +35,36 @@ public class miCondensers : MagicItem {
         {
             RuneTier runeTier = runeTiers[i];
             Debug.Log("Making one for " + runeTier.name);
-            newCondenser = Instantiate(childPrefab).GetComponent<miCondenser>();
-            newCondenser.transform.parent = gameObject.transform;
-            newCondenser.name = "Condenser-" + runeTier.name;
-            newCondenser.SetParent(this);
-            newCondenser.SetRunes(runeTier);
-            children.Add(newCondenser);
+            newCollector = Instantiate(childPrefab).GetComponent<Collector>();
+            newCollector.transform.parent = gameObject.transform;
+            newCollector.name = "Collector-" + runeTier.name;
+            newCollector.SetParent(this);
+            newCollector.SetRunes(runeTier);
+            children.Add(newCollector);
 
-            newCondenserRenderer = newCondenser.GetComponentInChildren<Renderer>();
-            newCondenserRenderer.material.SetColor("_Color", runeTier.groupColor);
+            newCollectorRenderer = newCollector.GetComponentInChildren<Renderer>();
+            newCollectorRenderer.material.SetColor("_Color", runeTier.groupColor);
 
 
             // Set positioning
             if (i == 0)
             {
                 // This is the Tier0 Condenser, it behaves differently
-                newCondenser.transform.localPosition = new Vector3(0, condenserHeight * 1.5f, 0);
+                newCollector.transform.localPosition = new Vector3(0, collectorHeight * 1.5f, 0);
             }
             else
             {
                 xPos = Mathf.Sin(theta * cPos);
                 zPos = Mathf.Cos(theta * cPos);
-                newCondenser.transform.localPosition = new Vector3(xPos * displacementRadius, condenserHeight, zPos * displacementRadius);
+                newCollector.transform.localPosition = new Vector3(xPos * displacementRadius, collectorHeight, zPos * displacementRadius);
                 cPos++;
                 // Skip slots 2 and 5
                 if (cPos == 2 || cPos == 5) {
                     cPos++;
                 }
             }
-            newCondenser.transform.LookAt(MagicChamber.Instance.focus.transform);
-            newCondenser.CreateChildren();
+            newCollector.transform.LookAt(MagicChamber.Instance.focus.transform);
+            newCollector.CreateChildren();
         }
 
     }

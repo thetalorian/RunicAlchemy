@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4812319959663062}
-  - component: {fileID: 114569316752809074}
+  - component: {fileID: 114967238710571600}
   m_Layer: 0
   m_Name: Altars
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114569316752809074
+--- !u!114 &114967238710571600
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1214774235383434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78018fbdcc9a04a8ba709a15ed5e86d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 57a2f3fb7ea7642cd98c15167b2309df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mageVisionParent: {fileID: 0}
@@ -56,4 +56,8 @@ MonoBehaviour:
   helpers: []
   camPosition: {x: 0, y: 0, z: 0}
   hasMesh: 0
+  hasDisplay: 0
   childPrefab: {fileID: 0}
+  displays: []
+  upgradableStats: []
+  bonuses: []

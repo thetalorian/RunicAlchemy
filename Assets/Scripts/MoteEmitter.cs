@@ -7,9 +7,7 @@ public class MoteEmitter : MonoBehaviour {
     [SerializeField]
     private ParticleSystem moteParticleSystem;
     [SerializeField]
-    private miMote miMote;
-    [SerializeField]
-    private Focus focus;
+    private Condenser condenser;
 
     List<ParticleCollisionEvent> collisionEvents;
 
@@ -26,9 +24,9 @@ public class MoteEmitter : MonoBehaviour {
         MoveMotes();
 	}
 
-    public void SetMote(miMote mote) 
+    public void SetCondenser(Condenser newCondenser) 
     {
-        miMote = mote;
+        condenser = newCondenser;
     }
 
     public void EmitMote() 
@@ -36,17 +34,12 @@ public class MoteEmitter : MonoBehaviour {
         moteParticleSystem.Emit(1);
     }
 
-    public void SetFocus(Focus newFocus) 
-    {
-        focus = newFocus;
-    }
-
     private void OnParticleCollision(GameObject other)
     {
         ParticlePhysicsExtensions.GetCollisionEvents(moteParticleSystem, other, collisionEvents);
         for (int i = 0; i < collisionEvents.Count; i++)
         {
-            MagicChamber.Instance.well.addMagic(miMote.GetCharge());
+            MagicChamber.Instance.well.addMagic(condenser.GetCharge());
         }
     }
 

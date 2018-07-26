@@ -9,14 +9,14 @@ public class MagicChamber : MagicItem {
     [SerializeField]
     GameObject focusPrefab;
     [SerializeField]
-    GameObject condensersPrefab;
+    GameObject collectorsPrefab;
     [SerializeField]
     GameObject crystalsPrefab;
     [SerializeField]
     GameObject altarsPrefab;
     [Space]
     public Focus focus;
-    public miCrystal well;
+    public Crystal well;
 
     private static MagicChamber _instance;
     public static MagicChamber Instance
@@ -57,7 +57,7 @@ public class MagicChamber : MagicItem {
         focus = newFocus;
     }
 
-    public void SetWell(miCrystal newWell)
+    public void SetWell(Crystal newWell)
     {
         well = newWell;
     }
@@ -75,15 +75,15 @@ public class MagicChamber : MagicItem {
         SetFocus(newFocus);
 
         // Then the condensers
-        miCondensers newCondensers = Instantiate(condensersPrefab).GetComponent<miCondensers>();
-        newCondensers.transform.SetParent(gameObject.transform, false);
-        newCondensers.name = "Condensers";
-        newCondensers.SetParent(this);
-        children.Add(newCondensers);
-        newCondensers.CreateChildren();
+        Collectors newCollectors = Instantiate(collectorsPrefab).GetComponent<Collectors>();
+        newCollectors.transform.SetParent(gameObject.transform, false);
+        newCollectors.name = "Collectors";
+        newCollectors.SetParent(this);
+        children.Add(newCollectors);
+        newCollectors.CreateChildren();
 
         // Then the crystals
-        miCrystals newCrystals = Instantiate(crystalsPrefab).GetComponent<miCrystals>();
+        Crystals newCrystals = Instantiate(crystalsPrefab).GetComponent<Crystals>();
         newCrystals.transform.SetParent(gameObject.transform, false);
         newCrystals.name = "Crystals";
         newCrystals.SetParent(this);

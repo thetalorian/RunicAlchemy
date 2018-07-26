@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class miCrystals : MagicItem {
+public class Crystals : MagicItem {
 
     [SerializeField]
     List<RuneTier> runeTiers = new List<RuneTier>();
@@ -26,14 +26,14 @@ public class miCrystals : MagicItem {
     public override void CreateChildren()
     {
         Debug.Log("Creating some crystal tiers!");
-        miCrystalTier newCrystalTier;
+        CrystalTier newCrystalTier;
 
         float offset = 0;
         for (int i = 0; i < runeTiers.Count; i++)
         {
             RuneTier runeTier = runeTiers[i];
             Debug.Log("Making one for " + runeTier.name);
-            newCrystalTier = Instantiate(childPrefab).GetComponent<miCrystalTier>();
+            newCrystalTier = Instantiate(childPrefab).GetComponent<CrystalTier>();
             newCrystalTier.transform.SetParent(gameObject.transform, false);
             newCrystalTier.gameObject.name = "CrystalTier-" + runeTier.name;
             newCrystalTier.SetParent(this);

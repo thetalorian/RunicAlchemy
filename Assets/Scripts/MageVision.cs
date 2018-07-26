@@ -209,6 +209,7 @@ public class MageVision : MonoBehaviour {
 
     private void CreateElementsRadial(){
         // Create a Radial display pattern for buttons.
+        Debug.Log("creating radial display");
         UIElement newUIElement;
         Button newUIElementButton;
         float theta = (2 * Mathf.PI / currentTarget.children.Count);
@@ -220,6 +221,7 @@ public class MageVision : MonoBehaviour {
         for (int i = 0; i < currentTarget.children.Count; i++)
         {
             MagicItem child = currentTarget.children[i];
+            Debug.Log("Creating button for " + child.name);
             //newUIElement = Instantiate(child.buttonPrefab).GetComponent<UIElement>();
             newUIElement = Instantiate(buttonPrefab).GetComponent<UIElement>();
             uiElements.Add(newUIElement);

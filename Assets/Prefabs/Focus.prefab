@@ -186,8 +186,8 @@ MonoBehaviour:
   children: []
   helpers: []
   camPosition: {x: 0, y: 0, z: 0}
-  hasMesh: 0
-  hasDisplay: 0
+  hasMesh: 1
+  hasDisplay: 1
   childPrefab: {fileID: 0}
   displays: []
   upgradableStats: []

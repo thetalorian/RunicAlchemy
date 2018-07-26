@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4449688618958360}
   - component: {fileID: 33955201788957544}
   - component: {fileID: 23408091979525706}
-  - component: {fileID: 114062269436361026}
+  - component: {fileID: 114265062028890696}
   m_Layer: 0
   m_Name: Crystal
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1657926468577702}
   m_Mesh: {fileID: 4300000, guid: c6adb44752c71489b8cf0349a1f4b9d2, type: 3}
---- !u!114 &114062269436361026
+--- !u!114 &114265062028890696
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1657926468577702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1db7ea50bdaac0e42b1676679c6922c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 80c1952f795f5480b989f945d04e3d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mageVisionParent: {fileID: 0}

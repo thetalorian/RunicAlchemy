@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4641631064050704}
-  - component: {fileID: 114821842665102254}
   - component: {fileID: 54726692230941864}
   - component: {fileID: 75254993518459716}
+  - component: {fileID: 114982944795633414}
   m_Layer: 0
   m_Name: Crystals
   m_TagString: Untagged
@@ -68,7 +68,7 @@ ConstantForce:
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 10, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
---- !u!114 &114821842665102254
+--- !u!114 &114982944795633414
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1541904072758922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6106beb26f2364787b05bc404dee70a4, type: 3}
+  m_Script: {fileID: 11500000, guid: c91d1bd149d174808b1a818a801edcf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mageVisionParent: {fileID: 0}
@@ -84,8 +84,12 @@ MonoBehaviour:
   helpers: []
   camPosition: {x: 0, y: 0, z: 0}
   hasMesh: 0
+  hasDisplay: 0
   childPrefab: {fileID: 1241622683711866, guid: 5a1e5377644e14549ad04fd6f8c99c27,
     type: 2}
+  displays: []
+  upgradableStats: []
+  bonuses: []
   runeTiers:
   - {fileID: 11400000, guid: b002415d2094c4a5ba1f5dc2b1c97ccc, type: 2}
   - {fileID: 11400000, guid: 9583721de7e38468ca7f8af53da31fe4, type: 2}
@@ -94,6 +98,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d0e08ca5e38784eb2bd7786a11941bfe, type: 2}
   - {fileID: 11400000, guid: 3ee5caaedc24f43d185a3288dd5d6cff, type: 2}
   - {fileID: 11400000, guid: 8c884d35efc58428a8d32bca4b2cf01d, type: 2}
-  crystalRadius: 0.2
+  crystalRadius: 0.15
   above: 0
-  focus: {fileID: 0}

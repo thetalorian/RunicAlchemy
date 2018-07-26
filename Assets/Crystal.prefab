@@ -139,15 +139,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c1952f795f5480b989f945d04e3d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enabled: 1
-  logName: Crystal
+  mageVisionParent: {fileID: 0}
+  children: []
+  helpers: []
+  camPosition: {x: 0, y: 0, z: 0}
+  hasMesh: 0
+  hasDisplay: 0
+  childPrefab: {fileID: 0}
+  displays: []
+  upgradableStats: []
+  bonuses: []
+  heldAmount: 0
+  rune: {fileID: 0}
+  crystalTypes: {fileID: 11400000, guid: fa7437476512f4ec4a2c63134cb8fa47, type: 2}
+  crystalType: {fileID: 0}
+  capacity: 0
+  sources: []
   isWell: 0
-  source1: {fileID: 0}
-  s1amount: 20
-  source2: {fileID: 0}
-  s2amount: 0
-  drawAmount: 1
-  heldAmountLabel: {fileID: 114511298175187416}
+  crystalSize:
+    level: 0
+    initialCost: 0
+    upgradeName: 
+    displayName: 
+    growthLinear: 0
+    growthQuadratic: 0
+    miParent: {fileID: 0}
+  crystalRefinement:
+    level: 0
+    initialCost: 0
+    upgradeName: 
+    displayName: 
+    growthLinear: 0
+    growthQuadratic: 0
+    miParent: {fileID: 0}
 --- !u!114 &114161318238476942
 MonoBehaviour:
   m_ObjectHideFlags: 1

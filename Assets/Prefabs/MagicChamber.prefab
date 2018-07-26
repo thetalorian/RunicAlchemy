@@ -404,16 +404,21 @@ MonoBehaviour:
   helpers: []
   camPosition: {x: 0, y: 0, z: 0}
   hasMesh: 0
+  hasDisplay: 0
   childPrefab: {fileID: 0}
+  displays: []
+  upgradableStats: []
+  bonuses: []
   focusPrefab: {fileID: 1091580328085184, guid: 2e40f3cd1f8534ec6805c7ccba0cf914,
     type: 2}
-  condensersPrefab: {fileID: 1674479684229620, guid: 00b020188507c4165b1d51442538b400,
+  collectorsPrefab: {fileID: 1674479684229620, guid: 00b020188507c4165b1d51442538b400,
     type: 2}
   crystalsPrefab: {fileID: 1541904072758922, guid: 175fd427d32044c6a84452fa8c121ce9,
     type: 2}
   altarsPrefab: {fileID: 1214774235383434, guid: 04f5cf0b8264d405fa4e7615498a51d5,
     type: 2}
   focus: {fileID: 0}
+  well: {fileID: 0}
 --- !u!114 &114084610539889182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -475,7 +480,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   inspecting: 0
-  focus: {fileID: 0}
 --- !u!124 &124590834075569864
 Behaviour:
   m_ObjectHideFlags: 1

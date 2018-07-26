@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class miCrystal : MagicItem {
+public class Crystal : MagicItem {
 
     [Header("Crystal Attributes")]
     [SerializeField]
@@ -17,7 +17,7 @@ public class miCrystal : MagicItem {
     [SerializeField]
     private int capacity;
 
-    public miCrystal[] sources;
+    public Crystal[] sources;
     int packetSize;
     int totalPacketSize;
     public bool isWell = false;
@@ -93,7 +93,7 @@ public class miCrystal : MagicItem {
 
             if (packets > 0)
             {
-                foreach (miCrystal source in sources)
+                foreach (Crystal source in sources)
                 {
                     int available = source.hasAmount(packetSize, this);
                     packets = Mathf.Min(packets, available);
@@ -103,7 +103,7 @@ public class miCrystal : MagicItem {
             if (packets > 0)
             {
                 bool success = true;
-                foreach (miCrystal source in sources) {
+                foreach (Crystal source in sources) {
                     success = success && source.takeAmount(packetSize * packets, this);
                 }
                 if (success) {
@@ -129,7 +129,7 @@ public class miCrystal : MagicItem {
 
     public int hasAmount(int packetSize, Component requester)
     {
-        if (requester is miCrystal) {
+        if (requester is Crystal) {
             // If the requester is a crystal,
             // we want to pay attention to
             // the waitlist, to ensure that everyone
@@ -161,7 +161,7 @@ public class miCrystal : MagicItem {
     public bool takeAmount(int amount, Component requester)
     {
         bool canTake = true;
-        if ((requester is miCrystal) && waitList.Peek() != (object)requester) {
+        if ((requester is Crystal) && waitList.Peek() != (object)requester) {
             canTake = false;
         }
 
@@ -169,7 +169,7 @@ public class miCrystal : MagicItem {
         {
             if (heldAmount >= amount)
             {
-                if (requester is miCrystal)
+                if (requester is Crystal)
                 {
                     reserveAmount = 0;
                     waitList.Dequeue();

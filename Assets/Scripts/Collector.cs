@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class miCondenser : MagicItem {
+public class Collector : MagicItem {
 
-    [Header("Condenser Settings")]
+    [Header("Collector Settings")]
     [SerializeField]
     RuneTier runeTier;
     List<Rune> runes = new List<Rune>();
     [SerializeField]
-    float moteRadius;
+    float condenserRadius;
     [SerializeField]
-    float moteProtrusion;
+    float condenserProtrusion;
 
     [SerializeField]
     protected GameObject EmitterPrefab;
-
+    [Space]
     [SerializeField]
     UpgradableStat speed;
     [SerializeField]
@@ -42,10 +42,10 @@ public class miCondenser : MagicItem {
 
     public override void CreateChildren()
     {
-        Debug.Log("Creating some motes!");
-        miMote newMote;
+        Debug.Log("Creating some condensers!");
+        Condenser newCondenser;
         MoteEmitter newEmitter;
-        Renderer newMoteRenderer;
+        Renderer newCondenserRenderer;
         float theta = (2 * Mathf.PI / runes.Count);
         float xPos;
         float yPos;
@@ -53,37 +53,37 @@ public class miCondenser : MagicItem {
         {
             Rune rune = runes[i];
             Debug.Log("Making one for " + rune.name);
-            newMote = Instantiate(childPrefab).GetComponent<miMote>();
-            newMote.transform.parent = gameObject.transform;
-            newMote.name = "Mote-" + rune.name;
-            newMote.SetParent(this);
-            newMote.SetRune(rune);
+            newCondenser = Instantiate(childPrefab).GetComponent<Condenser>();
+            newCondenser.transform.parent = gameObject.transform;
+            newCondenser.name = "Condenser-" + rune.name;
+            newCondenser.SetParent(this);
+            newCondenser.SetRune(rune);
 
-            newMoteRenderer = newMote.GetComponentInChildren<Renderer>();
-            newMoteRenderer.material.SetColor("_Color", rune.element.groupColor);
+            newCondenserRenderer = newCondenser.GetComponentInChildren<Renderer>();
+            newCondenserRenderer.material.SetColor("_Color", rune.element.groupColor);
             
-            children.Add(newMote);
+            children.Add(newCondenser);
 
             // Set positioning
             if (runes.Count > 1)
             {
                 xPos = Mathf.Sin(theta * i);
                 yPos = Mathf.Cos(theta * i);
-                newMote.transform.localPosition = new Vector3(xPos * moteRadius, yPos * moteRadius, moteProtrusion);
+                newCondenser.transform.localPosition = new Vector3(xPos * condenserRadius, yPos * condenserRadius, condenserProtrusion);
             }
             else
             {
-                newMote.transform.localPosition = new Vector3(0, 0, moteProtrusion);
+                newCondenser.transform.localPosition = new Vector3(0, 0, condenserProtrusion);
             }
 
             // Create the connected Emitter
             newEmitter = Instantiate(EmitterPrefab).GetComponent<MoteEmitter>();
             newEmitter.gameObject.transform.SetParent(MagicChamber.Instance.focus.emitters.transform,false);
             newEmitter.gameObject.name = "MoteEmitter-" + rune.name;
-            newEmitter.SetMote(newMote);
-            newMote.SetEmitter(newEmitter);
+            newEmitter.SetCondenser(newCondenser);
+            newCondenser.SetEmitter(newEmitter);
 
-            newMote.transform.LookAt(MagicChamber.Instance.focus.transform);
+            newCondenser.transform.LookAt(MagicChamber.Instance.focus.transform);
             helpers.Add(newEmitter.gameObject);
         }
 

@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class miMote : MagicItem {
-    [SerializeField]
-    Focus focus;
+public class Condenser : MagicItem {
+
+    [Header("Condenser Settings")]
     [SerializeField]
     Rune rune;
-
-    private int tick = 0;
     [SerializeField]
     private MoteEmitter moteEmitter;
-    private float timer = 0;
-
+    [SerializeField]
     private int charge = 1;
+
+    private int tick = 0;
+    private float timer = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -32,10 +32,6 @@ public class miMote : MagicItem {
     public void SetRune(Rune newRune)
     {
         rune = newRune;
-    }
-
-    public void SetFocus(Focus newFocus) {
-        focus = newFocus;
     }
 
     public void SetEmitter (MoteEmitter emitter) {

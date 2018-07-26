@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4767605022522366}
-  - component: {fileID: 114317094361265890}
+  - component: {fileID: 114866750321654730}
   m_Layer: 0
-  m_Name: Condensers
+  m_Name: Collectors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114317094361265890
+--- !u!114 &114866750321654730
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1674479684229620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f63bd74b4ed79a43805f3dad0815232, type: 3}
+  m_Script: {fileID: 11500000, guid: 40e33b141cabb41509d995d2ec8e3ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mageVisionParent: {fileID: 0}
@@ -56,8 +56,12 @@ MonoBehaviour:
   helpers: []
   camPosition: {x: 0, y: 0, z: 0}
   hasMesh: 0
+  hasDisplay: 0
   childPrefab: {fileID: 1714108574388774, guid: 66e041b8282873248ad5a36fdc5af73d,
     type: 2}
+  displays: []
+  upgradableStats: []
+  bonuses: []
   runeTiers:
   - {fileID: 11400000, guid: b002415d2094c4a5ba1f5dc2b1c97ccc, type: 2}
   - {fileID: 11400000, guid: 9583721de7e38468ca7f8af53da31fe4, type: 2}
@@ -67,5 +71,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3ee5caaedc24f43d185a3288dd5d6cff, type: 2}
   - {fileID: 11400000, guid: 8c884d35efc58428a8d32bca4b2cf01d, type: 2}
   displacementRadius: 4
-  condenserHeight: 2.5
-  focus: {fileID: 0}
+  collectorHeight: 3

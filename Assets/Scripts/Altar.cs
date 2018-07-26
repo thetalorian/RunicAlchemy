@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class miAltar : MagicItem {
+public class Altar : MagicItem {
 
 	// Use this for initialization
 	void Start () {

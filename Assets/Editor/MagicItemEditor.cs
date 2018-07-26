@@ -35,7 +35,7 @@ public class MagicChamberEditor : MagicItemEditor
 }
 
 
-[CustomEditor(typeof(miCondensers))]
+[CustomEditor(typeof(Collectors))]
 public class miCondensersEditor : MagicItemEditor
 {
     public override void OnInspectorGUI()
@@ -44,7 +44,7 @@ public class miCondensersEditor : MagicItemEditor
     }
 }
 
-[CustomEditor(typeof(miCondenser))]
+[CustomEditor(typeof(Collector))]
 public class miCondenserEditor : MagicItemEditor
 {
     public override void OnInspectorGUI()
@@ -53,7 +53,7 @@ public class miCondenserEditor : MagicItemEditor
     }
 }
 
-[CustomEditor(typeof(miCrystals))]
+[CustomEditor(typeof(Crystals))]
 public class miCrystalsEditor : MagicItemEditor
 {
     public override void OnInspectorGUI()
@@ -62,7 +62,7 @@ public class miCrystalsEditor : MagicItemEditor
     }
 }
 
-[CustomEditor(typeof(miCrystalTier))]
+[CustomEditor(typeof(CrystalTier))]
 public class miCrystalTierEditor : MagicItemEditor
 {
     public override void OnInspectorGUI()

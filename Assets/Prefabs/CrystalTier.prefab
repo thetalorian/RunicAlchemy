@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4608105077903584}
-  - component: {fileID: 114294913387776124}
+  - component: {fileID: 114214509794958678}
   m_Layer: 0
   m_Name: CrystalTier
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114294913387776124
+--- !u!114 &114214509794958678
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1241622683711866}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58b481d4082b4e839a8de60a60fedf8, type: 3}
+  m_Script: {fileID: 11500000, guid: cd6aa8af0290645c58e4769dacbc55fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mageVisionParent: {fileID: 0}
@@ -56,6 +56,7 @@ MonoBehaviour:
   helpers: []
   camPosition: {x: 0, y: 0, z: 0}
   hasMesh: 0
+  hasDisplay: 0
   childPrefab: {fileID: 1657926468577702, guid: f26f0d9cf6afc4147821f8f55487d076,
     type: 2}
   displays: []
@@ -66,5 +67,3 @@ MonoBehaviour:
   crystalRadius: 0
   offset: 0
   above: 0
-  focus: {fileID: 0}
-  EmitterPrefab: {fileID: 0}
